@@ -4,6 +4,8 @@ package com.freehoon.web.board.service;
 
 import java.util.List;
 
+import com.freehoon.common.Pagination;
+import com.freehoon.common.Search;
 import com.freehoon.web.board.model.BoardVO;
 
 
@@ -12,7 +14,7 @@ public interface BoardService {
 
 
 
-	public List<BoardVO> getBoardList() throws Exception;
+	public List<BoardVO> getBoardList(Search search) throws Exception;
 
 	public void insertBoard(BoardVO boardVO) throws Exception;
 
@@ -22,6 +24,7 @@ public interface BoardService {
 
 	public void deleteBoard(int bid) throws Exception;
 
+	public int getBoardListCnt(Search search) throws Exception;
 }
 
 

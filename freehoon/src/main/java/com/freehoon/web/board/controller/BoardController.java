@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.freehoon.web.HomeController;
+import com.freehoon.common.Pagination;
+import com.freehoon.common.Search;
 import com.freehoon.web.board.model.BoardVO;
 import com.freehoon.web.board.service.BoardService;
 
@@ -39,9 +40,46 @@ public class BoardController {
 
 	@RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
 
-	public String getBoardList(Model model) throws Exception {
+	public String getBoardList(Model model
+			, @RequestParam(required = false, defaultValue = "1") int page
 
-		model.addAttribute("boardList", boardService.getBoardList());
+			, @RequestParam(required = false, defaultValue = "1") int range
+			
+			, @RequestParam(required = false, defaultValue = "title") String searchType
+
+			, @RequestParam(required = false) String keyword
+
+			) throws Exception {
+
+		
+
+		Search search = new Search();
+
+		search.setSearchType(searchType);
+
+		search.setKeyword(keyword);
+		
+		//전체 게시글 수
+		int listCnt = boardService.getBoardListCnt(search);
+
+		
+		search.pageInfo(page, range, listCnt);
+		
+		
+		
+		
+
+	    //Pagination 객체생성
+
+//			Pagination pagination = new Pagination();
+//
+//	   pagination.pageInfo(page, range, listCnt);
+
+					
+
+			model.addAttribute("pagination", search);
+
+		model.addAttribute("boardList", boardService.getBoardList(search));
 
 		return "board/index";
 
@@ -50,7 +88,7 @@ public class BoardController {
 	@RequestMapping("/boardForm")
 	public String boardForm(@ModelAttribute("boardVO") BoardVO vo, Model model) {
 	return "board/boardForm";
-	}
+	}	
 
 	@RequestMapping(value = "/saveBoard", method = RequestMethod.POST)
 

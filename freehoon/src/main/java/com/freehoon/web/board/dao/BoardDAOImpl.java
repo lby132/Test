@@ -14,8 +14,8 @@ import org.apache.ibatis.session.SqlSession;
 
 import org.springframework.stereotype.Repository;
 
-
-
+import com.freehoon.common.Pagination;
+import com.freehoon.common.Search;
 import com.freehoon.web.board.model.BoardVO;
 
 
@@ -34,9 +34,9 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 
-	public List<BoardVO> getBoardList() throws Exception {
+	public List<BoardVO> getBoardList(Search search) throws Exception {
 
-		return sqlSession.selectList("com.freehoon.web.board.boardMapper.getBoardList");
+		return sqlSession.selectList("com.freehoon.web.board.boardMapper.getBoardList",search);
 
 	}
 
@@ -88,6 +88,22 @@ public class BoardDAOImpl implements BoardDAO {
 
 		return sqlSession.update("com.freehoon.web.board.boardMapper.updateViewCnt", bid);
 
+	}
+
+
+
+	@Override
+	public int getBoardListCnt(Search search) throws Exception {
+		
+		return sqlSession.selectOne("com.freehoon.web.board.boardMapper.getBoardListCnt",search);
+	}
+
+
+
+	@Override
+	public List<BoardVO> getBoardList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -5,9 +5,15 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.freehoon.common.Pagination;
+import com.freehoon.common.Search;
 import com.freehoon.web.board.dao.BoardDAO;
 import com.freehoon.web.board.model.BoardVO;
+import com.freehoon.web.error.controller.NotFoundException;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -16,44 +22,53 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 
 	@Override
-	public List<BoardVO> getBoardList() throws Exception {
-		// TODO Auto-generated method stub
-		return boardDAO.getBoardList();
+
+	public List<BoardVO> getBoardList(Search search) throws Exception {
+
+		return boardDAO.getBoardList(search);
+
 	}
 
 	@Override
 	public void insertBoard(BoardVO boardVO) throws Exception {
 		boardDAO.insertBoard(boardVO);
 	}
-
+	
+	//@Transactional
 	@Override
 
 	public BoardVO getBoardContent(int bid) throws Exception{
 
 		BoardVO boardVO = new BoardVO();
 
+		 
+
 		boardDAO.updateViewCnt(bid);
 
-	//       boardVO = boardDAO.getBoardContent(bid);            <= 기존 상세내역 조회 부분은 주석 처리 합니다.
+		boardVO = boardDAO.getBoardContent(bid);        //주석을 풀어 줍니다.
 
-	// Cate_cd에 컬럼에서 저장할 수 있는 크기보다 큰 문자열을 저장하도록 셋팅을 하고 게시물 수정 로직을 호출 합니다.
+		
+		  // 예외처리 테스트가 끝났으므로 아래 구문은 삭제 하거나 주석 처리 합니다.
+		  
+//		   try {
+//		  
+//		   boardVO.setBid(bid);
+//		  
+//		   boardVO.setCate_cd("1111111111111111111111111111111111111");
+//		  
+//		   boardDAO.updateBoard(boardVO);
+//		  
+//		   } catch (RuntimeException e) {
+//		  
+//		   throw new NotFoundException();
+//		  
+//		   }
+		 
 
-  // 따라서 수정 SQL 문 처리시 문제가 발생하게 됩니다.
-
-    boardVO.setBid(bid);
-
-		boardVO.setCate_cd("1111111111111111111111111111111111111");   
-
-		boardDAO.updateBoard(boardVO);
-
- 
 
 		return boardVO;
 
 	}
-
-
-
 
 	@Override
 	public void updateBoard(BoardVO boardVO) throws Exception {
@@ -66,4 +81,10 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.deleteBoard(bid);
 	}
 
+	@Override
+	public int getBoardListCnt(Search search) throws Exception {
+		return boardDAO.getBoardListCnt(search);
+	}
+
+	
 }
