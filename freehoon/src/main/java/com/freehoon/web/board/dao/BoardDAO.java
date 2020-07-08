@@ -5,6 +5,7 @@ import java.util.List;
 import com.freehoon.common.Pagination;
 import com.freehoon.common.Search;
 import com.freehoon.web.board.model.BoardVO;
+import com.freehoon.web.board.model.ReplyVO;
 
 public interface BoardDAO {
 
@@ -23,4 +24,22 @@ public interface BoardDAO {
 	public int getBoardListCnt(Search search) throws Exception;
 
 	public List<BoardVO> getBoardList();
+	
+	// ´ñ±Û ¸®½ºÆ®
+
+		public List<ReplyVO> getReplyList(int bid) throws Exception;
+
+		
+
+		public int saveReply(ReplyVO replyVO) throws Exception;
+
+		
+
+		public int updateReply(ReplyVO replyVO) throws Exception;
+
+		
+
+		public int deleteReply(int rid) throws Exception;
+
+
 }

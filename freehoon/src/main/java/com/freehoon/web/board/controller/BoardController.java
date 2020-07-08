@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.freehoon.common.Pagination;
 import com.freehoon.common.Search;
 import com.freehoon.web.board.model.BoardVO;
+import com.freehoon.web.board.model.ReplyVO;
 import com.freehoon.web.board.service.BoardService;
 
 
@@ -28,6 +29,7 @@ import com.freehoon.web.board.service.BoardService;
 @RequestMapping(value = "/board")
 
 public class BoardController {
+	
 
 
 
@@ -62,10 +64,7 @@ public class BoardController {
 		//전체 게시글 수
 		int listCnt = boardService.getBoardListCnt(search);
 
-		
 		search.pageInfo(page, range, listCnt);
-		
-		
 		
 		
 
@@ -77,7 +76,7 @@ public class BoardController {
 
 					
 
-			model.addAttribute("pagination", search);
+		model.addAttribute("pagination", search);
 
 		model.addAttribute("boardList", boardService.getBoardList(search));
 
@@ -90,11 +89,11 @@ public class BoardController {
 	return "board/boardForm";
 	}	
 
-	@RequestMapping(value = "/saveBoard", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveBoard", method = RequestMethod.GET)
 
 	public String saveBoard(@ModelAttribute("boardVO") BoardVO boardVO
 
-			, @RequestParam("mode") String mode
+			, @RequestParam(value = "mode", required = false) String mode
 
 			, RedirectAttributes rttr) throws Exception {
 
@@ -125,6 +124,7 @@ public class BoardController {
 		public String getBoardContent(Model model, @RequestParam("bid") int bid) throws Exception {
 
 			model.addAttribute("boardContent", boardService.getBoardContent(bid));
+			model.addAttribute("replyVO", new ReplyVO());
 
 			return "board/boardContent";
 

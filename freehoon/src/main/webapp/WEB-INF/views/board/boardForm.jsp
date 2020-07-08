@@ -4,7 +4,7 @@
 
 <%@ taglib prefix="form" uri = "http://www.springframework.org/tags/form" %> 
 
-<%@ include file="/WEB-INF/views/layout/header.jsp"%>
+<%-- <%@ include file="/WEB-INF/views/layout/header.jsp"%> --%>
 
 
 
@@ -34,8 +34,7 @@
 
 <title>board</title>
 
-
-
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>  	
 <script>
 
 	$(document).on('click', '#btnSave', function(e){
@@ -90,6 +89,7 @@
 
 	
 </script>
+<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
 
 <style>
 
@@ -115,7 +115,7 @@ body {
 
 			<h2>board Form</h2>
 
-			<form:form name="form" id="form" role="form" modelAttribute="boardVO" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
+			<form:form name="form" id="form" role="form" modelAttribute="boardVO" method="get" action="${pageContext.request.contextPath}/board/saveBoard">
 
 <form:hidden path="bid" />
 

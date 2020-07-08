@@ -1,22 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%@ include file="/WEB-INF/views/layout/header.jsp"%> --%>
-
+<%-- <%@ include file="/WEB-INF/views/layout/header.jsp"%>  --%>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
-integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
 <title>board</title>
 <style>
-
 body {
 
 padding-top: 70px;
@@ -26,7 +16,6 @@ padding-bottom: 30px;
 }
 
 </style>
-<c:url value="/board/getBoardList" var="getBoardListURL"></c:url>
 <script>
 
 	$(document).on('click', '#btnWriteForm', function(e){
@@ -155,10 +144,6 @@ padding-bottom: 30px;
 				</table>
 
 			</div>
-
-
-
-
 
 
 

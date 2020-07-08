@@ -13,6 +13,7 @@ import com.freehoon.common.Pagination;
 import com.freehoon.common.Search;
 import com.freehoon.web.board.dao.BoardDAO;
 import com.freehoon.web.board.model.BoardVO;
+import com.freehoon.web.board.model.ReplyVO;
 import com.freehoon.web.error.controller.NotFoundException;
 
 @Service
@@ -85,6 +86,46 @@ public class BoardServiceImpl implements BoardService {
 	public int getBoardListCnt(Search search) throws Exception {
 		return boardDAO.getBoardListCnt(search);
 	}
+
+	// ´ñ±Û ¸®½ºÆ®
+
+		@Override
+
+		public List<ReplyVO> getReplyList(int bid) throws Exception {
+
+			return boardDAO.getReplyList(bid);
+
+		}
+
+
+
+		@Override
+
+		public int saveReply(ReplyVO replyVO) throws Exception {
+
+			return boardDAO.saveReply(replyVO);
+
+		}
+
+
+
+		@Override
+
+		public int updateReply(ReplyVO replyVO) throws Exception {
+
+			return boardDAO.updateReply(replyVO);
+
+		}
+
+
+
+		@Override
+
+		public int deleteReply(int rid) throws Exception {
+
+			return boardDAO.deleteReply(rid);
+
+		}
 
 	
 }

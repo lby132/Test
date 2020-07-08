@@ -113,7 +113,7 @@ public class BoardDAOTest {
 
 	
 
-	@Test  
+	@Test  @Ignore
 
 	public void testInsertBoard() throws Exception {
 
@@ -163,7 +163,7 @@ public class BoardDAOTest {
 
 	
 
-	@Test @Ignore 
+	@Test 
 
 	public void testUpdateBoard() throws Exception {
 
